@@ -36,46 +36,48 @@ class Test {
     const lights = [];
     const pointLights = [];
 
-    function makePointLight(
-      colorr,
-      intensity,
-      positionX,
-      positionY,
-      positionZ
-    ) {
-      let pointLight = new THREE.PointLight(colorr, intensity, 1);
-      pointLight.position.x = Math.sin(time * positionX) * 0.1;
-      pointLight.position.y = Math.cos(time * positionY) * 0.1;
-      pointLight.position.z = Math.cos(time * positionZ) * 0.8;
+    function makePointLight(color, intensity, positionX, positionY, positionZ) {
+      let pointLight = new THREE.PointLight(color, intensity, 1);
+      pointLight.position.x = Math.sin(time * positionX) * 0.7;
+      pointLight.position.y = Math.cos(time * positionY) * 0.7;
+      pointLight.position.z = Math.cos(time * positionZ) * 0.7;
       pointLight.add(
         new THREE.Mesh(sphere, new THREE.MeshBasicMaterial({ color: 0xfafafa }))
       );
       pointLights.push(pointLight);
-      console.log(colorr);
+      console.log(color);
       console.log(sphere);
       console.log(pointLights);
     }
 
-    for (let i = 0; i < pointLights.length; i++) {
-      scene.add(pointLights[i]);
-    }
-
     let light1 = new THREE.DirectionalLight(0xf3aaaa, 0.8, 0);
     light1.position.set(100, 150, -100);
-    scene.add(light1);
+    lights.push(light1);
 
     var light2 = new THREE.DirectionalLight(0xf4baba, 0.6, 0);
     light2.position.set(-100, -200, -100);
     lights.push(light2);
 
-    var light3 = new THREE.PointLight(0xf4baba, 0.1, 0);
+    var light3 = new THREE.DirectionalLight(0xf4baba, 0.1, 0);
     light3.position.set(-150, 50, 150);
     lights.push(light3);
-    makePointLight(0xf4baba, 0.5, 1, 2, 3);
-    makePointLight(0xf3baba, 0.5, 3, 2, 1);
-    makePointLight(0xf1baba, 0.5, 1, 2, 0.3);
-    makePointLight(0xf2baba, 0.5, 0.8, 2, 3);
-    makePointLight(0xf5baba, 0.5, 2, 1.2, 3);
+
+    makePointLight(0xf4baba, 0.1, 2, 3, 1);
+    makePointLight(0xf4baba, 0.6, 0.1, 4, 2);
+    makePointLight(0xf4baba, 0.3, 3, 1, 2);
+    makePointLight(0xf4baba, 0.5, 4, 8, 4);
+    makePointLight(0xf4baba, 0.1, 0.7, 3, 1);
+    makePointLight(0xf4baba, 0.6, 3, 1, 2);
+    makePointLight(0xf4baba, 0.4, 3, 4, 4);
+    makePointLight(0xf4baba, 0.3, 2, 3, 3);
+    makePointLight(0xf4baba, 0.7, 0.8, 1, 1);
+    makePointLight(0xf4baba, 0.1, 1, 2, 4);
+    makePointLight(0xf4baba, 0.1, 1, 3, 3);
+
+    for (let i = 0; i < pointLights.length; i++) {
+      scene.add(pointLights[i]);
+    }
+
     for (let i = 0; i < lights.length; i++) {
       scene.add(lights[i]);
     }
@@ -96,6 +98,7 @@ class Test {
       camera.position.z = Math.sin(time3 * 0.7) * 1;
       renderer.render(scene, camera);
     }
+    console.log(scene);
     animate();
   }
 
