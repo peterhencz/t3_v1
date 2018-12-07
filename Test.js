@@ -53,6 +53,7 @@ class Test {
       pointLights.push(pointLight);
       console.log(colorr);
       console.log(sphere);
+      console.log(pointLights);
     }
 
     for (let i = 0; i < pointLights.length; i++) {
@@ -70,7 +71,11 @@ class Test {
     var light3 = new THREE.PointLight(0xf4baba, 0.1, 0);
     light3.position.set(-150, 50, 150);
     lights.push(light3);
-
+    makePointLight(0xf4baba, 0.5, 1, 2, 3);
+    makePointLight(0xf3baba, 0.5, 3, 2, 1);
+    makePointLight(0xf1baba, 0.5, 1, 2, 0.3);
+    makePointLight(0xf2baba, 0.5, 0.8, 2, 3);
+    makePointLight(0xf5baba, 0.5, 2, 1.2, 3);
     for (let i = 0; i < lights.length; i++) {
       scene.add(lights[i]);
     }
@@ -89,11 +94,6 @@ class Test {
       camera.position.x = Math.sin(time3 * 0.7) * 1;
       camera.position.y = Math.sin(time3 * 0.7) * 1;
       camera.position.z = Math.sin(time3 * 0.7) * 1;
-      makePointLight(0xf4baba, 0.5, 1, 2, 3);
-      makePointLight(0xf3baba, 0.5, 3, 2, 1);
-      makePointLight(0xf1baba, 0.5, 1, 2, 0.3);
-      makePointLight(0xf2baba, 0.5, 0.8, 2, 3);
-      makePointLight(0xf5baba, 0.5, 2, 1.2, 3);
       renderer.render(scene, camera);
     }
     animate();
