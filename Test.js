@@ -13,7 +13,7 @@ class Test {
     document.body.appendChild(renderer.domElement);
 
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xf6caca);
+    scene.background = new THREE.Color(0xd6ccc9);
 
     const camera = new THREE.PerspectiveCamera(
       75,
@@ -28,9 +28,12 @@ class Test {
     const geometry = new THREE.CubeGeometry(0.6, 0.6, 0.6);
     const material = Test.createMaterialPalette(100);
     const cube = new THREE.Mesh(geometry, material);
+
+    //CUBE
+
     // scene.add(cube);
 
-    let sphere = new THREE.SphereBufferGeometry(0.02, 100, 100);
+    let sphere = new THREE.SphereBufferGeometry(0.01, 100, 100);
     let time = Date.now() * 0.0001;
 
     const lights = [];
@@ -39,7 +42,7 @@ class Test {
     function makePointLight(color, intensity) {
       let pointLight = new THREE.PointLight(color, intensity, 1);
       pointLight.add(
-        new THREE.Mesh(sphere, new THREE.MeshBasicMaterial({ color: 0xfafafa }))
+        new THREE.Mesh(sphere, new THREE.MeshBasicMaterial({ color: 0xff6128 }))
       );
       pointLights.push(pointLight);
       console.log(color);
@@ -59,7 +62,7 @@ class Test {
     light3.position.set(-150, 50, 150);
     lights.push(light3);
 
-    for (let i = 0; i < 200; i++) {
+    for (let i = 0; i < 400; i++) {
       makePointLight(0xf4baba, 0.5);
     }
 
@@ -79,10 +82,13 @@ class Test {
       cube.rotation.z += 0.002;
       render();
     }
-    // camera.position.set(1, 1, 1);
+
+    //fix camera
+
+    camera.position.set(1, 1, 1);
 
     function render() {
-      let time = Date.now() * 0.00001;
+      let time = Date.now() * 0.000002;
       let time2 = Date.now() * 0.0001;
       function spotlightPosition(positionX, positionY, positionZ) {
         for (let i = 0; i < pointLights.length; i++) {
@@ -97,9 +103,11 @@ class Test {
           );
         }
       }
-      camera.position.x = Math.cos(time2 * 7) + 2;
-      camera.position.y = Math.cos(time2 - 7) + 2;
-      camera.position.z = Math.sin(time2 / 7) + 2;
+      // Camera in motion
+
+      // camera.position.x = Math.cos(time2 * 7) + 2;
+      // camera.position.y = Math.cos(time2 - 7) + 2;
+      // camera.position.z = Math.sin(time2 / 7) + 2;
 
       spotlightPosition(7, 7, 3);
 
